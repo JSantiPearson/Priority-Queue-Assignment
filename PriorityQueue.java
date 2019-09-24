@@ -15,12 +15,19 @@ public class PriorityQueue {
 
 	protected Map<Integer, Integer> location;
 	protected List<Pair<Integer, Integer>> heap;
+	
+	private static final int ROOT_INDEX = 0;
 
 	/**
 	 *  Constructs an empty priority queue
 	 */
 	public PriorityQueue() {
-		// TODO: Fill in
+		heap = new ArrayList<Pair<Integer, Integer>>();
+		location = new HashMap<Integer, Integer>();
+	}
+	
+	public static void main(String[] args) {
+
 	}
 
 	/**
@@ -66,6 +73,7 @@ public class PriorityQueue {
 	 */
 	public int topPriority() {
 		// TODO: Fill in
+		return heap.get(ROOT_INDEX).priority;
 	}
 
 
@@ -79,7 +87,7 @@ public class PriorityQueue {
 	 *	</ul>
 	 */
 	public int topElement() {
-		// TODO: Fill in
+		return heap.get(ROOT_INDEX).element;
 	}
 
 
@@ -114,6 +122,7 @@ public class PriorityQueue {
 	 */
 	public int getPriority(int element) {
 		// TODO: Fill in
+		return 0;
 	}
 
 	/**
@@ -121,7 +130,12 @@ public class PriorityQueue {
 	 *  @return true if the queue contains no elements, false otherwise
 	 */
 	public boolean isEmpty() {
-		// TODO: Fill in
+		if (heap.size() == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -130,6 +144,7 @@ public class PriorityQueue {
 	 */
 	public boolean isPresent(int element) {
 		// TODO: Fill in
+		return false;
 	}
 
 	/**
@@ -144,7 +159,7 @@ public class PriorityQueue {
 	 *  @return number of elements in the priority queue
 	 */
 	public int size() {
-		// TODO: Fill in
+		return 0;
 	}
 
 
@@ -161,6 +176,7 @@ public class PriorityQueue {
 	 */
 	private int pushDown(int start_index) {
 		// TODO: Fill in
+		return 0;
 	}
 
 	/**
@@ -170,6 +186,7 @@ public class PriorityQueue {
 	 */
 	private int percolateUp(int start_index) {
 		// TODO: Fill in
+		return 0;
 	}
 
 
@@ -189,7 +206,13 @@ public class PriorityQueue {
 	 * @return index of element's left child in list
 	 */
 	private int left(int parent) {
-		// TODO: Fill in
+		int leftChildIndex = 2*parent+1;
+		if (heap.get(leftChildIndex) != null) {
+			return leftChildIndex;
+		}
+		else {
+			throw new AssertionError("This Pair does not have a left child!");
+		}
 	}
 
 	/**
@@ -198,7 +221,13 @@ public class PriorityQueue {
 	 * @return index of element's right child in list
 	 */
 	private int right(int parent) {
-		// TODO: Fill in
+		int rightChildIndex = 2*parent+2;
+		if (heap.get(rightChildIndex) != null) {
+			return rightChildIndex;
+		}
+		else {
+			throw new AssertionError("This Pair does not have a right child!");
+		}
 	}
 
 	/**
@@ -208,7 +237,13 @@ public class PriorityQueue {
 	 */
 
 	private int parent(int child) {
-		// TODO: Fill in
+		int parentIndex = (int) Math.floor((child-1)/2);
+		if (heap.get(parentIndex) != null) {
+			return parentIndex;
+		}
+		else {
+			throw new AssertionError("This Pair does not have a parent!");
+		}
 	}
 
 
@@ -223,6 +258,7 @@ public class PriorityQueue {
 	 */
 	private int pushDownRoot() {
 		// TODO: A one-line function that calls pushDown()
+		return 0;
 	}
 
 	/**
@@ -233,6 +269,7 @@ public class PriorityQueue {
 	 */
 	private int percolateUpLeaf(){
 		// TODO: A one-line function that calls percolateUp()
+		return 0;
 	}
 
 	/**
@@ -242,6 +279,7 @@ public class PriorityQueue {
 	 */
 	private boolean isLeaf(int i){
 		// TODO: Fill in
+		return false;
 	}
 
 	/**
@@ -251,6 +289,7 @@ public class PriorityQueue {
 	 */
 	private boolean hasTwoChildren(int i) {
 		// TODO: Fill in
+		return false;
 	}
 
 	/**
