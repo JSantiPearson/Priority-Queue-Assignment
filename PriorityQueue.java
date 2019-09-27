@@ -27,7 +27,7 @@ public class PriorityQueue {
 	}
 	
 	public static void main(String[] args) {
-
+		
 	}
 
 	/**
@@ -175,7 +175,26 @@ public class PriorityQueue {
 	 * @return the index in the list where the element is finally stored
 	 */
 	private int pushDown(int start_index) {
-		// TODO: Fill in
+		int startPriority = heap.get(start_index).priority;
+		Pair<Integer, Integer> left = heap.get(left(start_index));
+		Pair<Integer, Integer> right = heap.get(right(start_index));
+		Pair<Integer, Integer> child;
+		int childIndex;
+		if (left.priority >= right.priority) {
+			child = left;
+			childIndex = left(start_index);
+		}
+		else {
+			child = right;
+			childIndex = right(start_index);
+		}
+		if (startPriority >= child.priority) {
+			return start_index;
+		}
+		else {
+			swap(start_index, childIndex);
+			pushDown(childIndex);
+		}
 		return 0;
 	}
 
@@ -185,7 +204,6 @@ public class PriorityQueue {
 	 * @return the index in the list where the element is finally stored
 	 */
 	private int percolateUp(int start_index) {
-		// TODO: Fill in
 		return 0;
 	}
 
