@@ -25,7 +25,7 @@ public class PriorityQueue {
 		heap = new ArrayList<Pair<Integer, Integer>>();
 		location = new HashMap<Integer, Integer>();
 	}
-	
+	//Jordan
 	public static void main(String[] args) {
 		
 	}
@@ -44,6 +44,7 @@ public class PriorityQueue {
 	 *	</ul>
 	 *
 	 */
+	//Thalia
 	public void push(int priority, int element) {
 		// TODO: Fill in
 	}
@@ -57,6 +58,7 @@ public class PriorityQueue {
 	 *	</ul>
 	 *
 	 */
+	//Jordan
 	public void pop(){
 		int tailIndex = heap.size()-1;
 		swap(ROOT_INDEX, tailIndex);
@@ -74,6 +76,7 @@ public class PriorityQueue {
 	 *	<li> The priority queue is non-empty.</li>
 	 *	</ul>
 	 */
+	//Jordan
 	public int topPriority() {
 		// TODO: Fill in
 		return heap.get(ROOT_INDEX).priority;
@@ -89,6 +92,7 @@ public class PriorityQueue {
 	 *	<li> The priority queue is non-empty.</li>
 	 *	</ul>
 	 */
+	//Jordan
 	public int topElement() {
 		return heap.get(ROOT_INDEX).element;
 	}
@@ -107,6 +111,7 @@ public class PriorityQueue {
 	 *	<li> The new priority is non-negative </li>
 	 *	</ul>
 	 */
+	//Thalia
 	public void changePriority(int newpriority, int element) {
 		// TODO: Fill in
 	}
@@ -123,6 +128,7 @@ public class PriorityQueue {
 	 *	<li> The element exists in the priority queue</li>
 	 *	</ul>
 	 */
+	//Thalia
 	public int getPriority(int element) {
 		// TODO: Fill in
 		return 0;
@@ -132,6 +138,7 @@ public class PriorityQueue {
 	 *  Returns true if the priority queue contains no elements
 	 *  @return true if the queue contains no elements, false otherwise
 	 */
+	//Jordan
 	public boolean isEmpty() {
 		if (heap.size() == 0) {
 			return true;
@@ -145,6 +152,7 @@ public class PriorityQueue {
 	 *  Returns true if the element exists in the priority queue.
 	 *  @return true if the element exists, false otherwise
 	 */
+	//Jordan
 	public boolean isPresent(int element) {
 		// TODO: Fill in
 		return false;
@@ -153,6 +161,7 @@ public class PriorityQueue {
 	/**
 	 *  Removes all elements from the priority queue
 	 */
+	//Jordan
 	public void clear() {
 		// TODO: Fill in
 	}
@@ -161,6 +170,7 @@ public class PriorityQueue {
 	 *  Returns the number of elements in the priority queue
 	 *  @return number of elements in the priority queue
 	 */
+	//Jordan
 	public int size() {
 		return heap.size();
 	}
@@ -177,6 +187,7 @@ public class PriorityQueue {
 	 * @param start_index the index of the element to be pushed down
 	 * @return the index in the list where the element is finally stored
 	 */
+	//Jordan
 	private int pushDown(int start_index) {
 		int startPriority = heap.get(start_index).priority;
 		Pair<Integer, Integer> left = heap.get(left(start_index));
@@ -206,6 +217,7 @@ public class PriorityQueue {
 	 * @param start_index the index of the element to be percolated up
 	 * @return the index in the list where the element is finally stored
 	 */
+	//Thalia
 	private int percolateUp(int start_index) {
 		return 0;
 	}
@@ -217,6 +229,7 @@ public class PriorityQueue {
 	 * @param i The index of the element to be swapped
 	 * @param j The index of the element to be swapped
 	 */
+	//Thalia
 	private void swap(int i, int j) {
 		// TODO: Fill in
 	}
@@ -226,6 +239,7 @@ public class PriorityQueue {
 	 * @param parent index of element in list
 	 * @return index of element's left child in list
 	 */
+	//Jodan
 	private int left(int parent) {
 		int leftChildIndex = 2*parent+1;
 		if (heap.get(leftChildIndex) != null) {
@@ -241,6 +255,7 @@ public class PriorityQueue {
 	 * @param parent index of element in list
 	 * @return index of element's right child in list
 	 */
+	//Jordan
 	private int right(int parent) {
 		int rightChildIndex = 2*parent+2;
 		if (heap.get(rightChildIndex) != null) {
@@ -256,7 +271,7 @@ public class PriorityQueue {
 	 * @param child index of element in list
 	 * @return index of element's parent in list
 	 */
-
+	//Jordan
 	private int parent(int child) {
 		int parentIndex = (int) Math.floor((child-1)/2);
 		if (heap.get(parentIndex) != null) {
