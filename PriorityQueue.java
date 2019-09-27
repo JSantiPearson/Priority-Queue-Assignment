@@ -58,7 +58,10 @@ public class PriorityQueue {
 	 *
 	 */
 	public void pop(){
-		// TODO: Fill in
+		int tailIndex = heap.size()-1;
+		swap(ROOT_INDEX, tailIndex);
+		heap.remove(tailIndex);
+		pushDown(ROOT_INDEX);
 	}
 
 
@@ -159,7 +162,7 @@ public class PriorityQueue {
 	 *  @return number of elements in the priority queue
 	 */
 	public int size() {
-		return 0;
+		return heap.size();
 	}
 
 
