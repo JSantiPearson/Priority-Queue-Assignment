@@ -27,7 +27,17 @@ public class PriorityQueue {
 	}
 	//Jordan
 	public static void main(String[] args) {
-		
+		PriorityQueue queue = new PriorityQueue();
+		queue.push(30,-3);
+		queue.push(1,-3);
+		queue.push(4,-3);
+		queue.push(8,-3);
+		queue.push(3,-3);
+		queue.push(40,-3);
+		for(int i = 0; i < queue.size(); i++) {
+			System.out.println(queue.heap.get(i).priority);
+		}
+
 	}
 
 	/**
@@ -46,8 +56,16 @@ public class PriorityQueue {
 	 */
 	//Thalia
 	public void push(int priority, int element) {
-		// TODO: Fill in
+		//Pair<Integer, Integer> left = heap.get(left(start_index));
+		Pair<Integer, Integer> new_pair = new Pair<>(priority, element);
+		heap.add(new_pair);
+		int index = heap.size() - 1;
+		while(index >= 0) {
+			index = percolateUp(index);
+		}
+
 	}
+
 
 	/**
 	 *  Remove the highest priority element
@@ -59,7 +77,7 @@ public class PriorityQueue {
 	 *
 	 */
 	//Jordan
-	public void pop(){
+	public void pop() {
 		int tailIndex = heap.size()-1;
 		swap(ROOT_INDEX, tailIndex);
 		heap.remove(tailIndex);
@@ -219,7 +237,16 @@ public class PriorityQueue {
 	 */
 	//Thalia
 	private int percolateUp(int start_index) {
-		return 0;
+		if (start_index == 0) {
+			return -1;
+		}
+		//System.out.println(start_index);
+		int parentIndex = (start_index - 1)/2;
+		if (heap.get(start_index).priority < heap.get(parentIndex).priority ) {
+			swap(start_index, parentIndex);
+			return parentIndex;
+		}
+		return -1;
 	}
 
 
@@ -231,7 +258,10 @@ public class PriorityQueue {
 	 */
 	//Thalia
 	private void swap(int i, int j) {
-		// TODO: Fill in
+		Pair temp = heap.get(i);
+		heap.add(i, heap.get(j));
+		heap.add(j, temp);
+				//add(int index, E element)
 	}
 
 	/**
