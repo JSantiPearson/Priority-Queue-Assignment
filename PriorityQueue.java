@@ -7,7 +7,7 @@ import java.util.Map;
  * A priority queue class implemented using a min heap.
  * Priorities cannot be negative.
  *
- * @author Jordan Pearson and Thalia
+ * @author Jordan Pearson and Thalia Barr-Malec
  * @version Date
  *
  */
