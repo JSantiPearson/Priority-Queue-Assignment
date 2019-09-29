@@ -258,9 +258,10 @@ public class PriorityQueue {
 	 */
 	//Thalia
 	private void swap(int i, int j) {
+		//set(int index, E element)
 		Pair temp = heap.get(i);
-		heap.add(i, heap.get(j));
-		heap.add(j, temp);
+		heap.set(i, heap.get(j));
+		heap.set(j, temp);
 				//add(int index, E element)
 	}
 
