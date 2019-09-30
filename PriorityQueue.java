@@ -36,14 +36,13 @@ public class PriorityQueue {
 		queue.push(8,-1);
 		queue.push(3,-9);
 		queue.push(40,-2);
-
 		for(int i = 0; i < queue.size(); i++) {
 			System.out.print(queue.heap.get(i).priority);
 			System.out.print("\t");
 			System.out.println(queue.heap.get(i).element);
 		}
 		System.out.println(queue.location.toString());
-
+		System.out.print(queue.getPriority(-3));
 	}
 
 	/**
@@ -156,10 +155,14 @@ public class PriorityQueue {
 	 *         </ul>
 	 */
 	// Thalia
+
 	public int getPriority(int element) {
-		// TODO: Fill in
-		return 0;
+
+		System.out.println(location.get(element));
+		int index = location.get(element);
+		return heap.get(index).priority;
 	}
+
 
 	/**
 	 * Returns true if the priority queue contains no elements
@@ -263,8 +266,6 @@ public class PriorityQueue {
 		int parentIndex = (start_index - 1)/2;
 		if (heap.get(start_index).priority < heap.get(parentIndex).priority ) {
 			swap(start_index, parentIndex);
-			location.put(heap.get(parentIndex).element, parentIndex);
-			location.put(heap.get(start_index).element, start_index);
 			return parentIndex;
 		}
 		return -1;
@@ -283,6 +284,8 @@ public class PriorityQueue {
 		Pair temp = heap.get(i);
 		heap.set(i, heap.get(j));
 		heap.set(j, temp);
+		location.put(heap.get(i).element, i);
+		location.put(heap.get(j).element, j);
 				//add(int index, E element)
 	}
 
