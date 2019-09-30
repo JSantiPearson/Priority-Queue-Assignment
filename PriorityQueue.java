@@ -28,6 +28,7 @@ public class PriorityQueue {
 
 	// Jordan
 	public static void main(String[] args) {
+		//System.out.print("hello world");
 		PriorityQueue queue = new PriorityQueue();
 
 		queue.push(30,-3);
@@ -36,6 +37,8 @@ public class PriorityQueue {
 		queue.push(8,-1);
 		queue.push(3,-9);
 		queue.push(40,-2);
+		//queue.pop();
+		queue.changePriority(0, -2);
 		for(int i = 0; i < queue.size(); i++) {
 			System.out.print(queue.heap.get(i).priority);
 			System.out.print("\t");
@@ -43,7 +46,9 @@ public class PriorityQueue {
 		}
 		System.out.println(queue.location.toString());
 		System.out.print(queue.getPriority(-3));
+		//System.out.print(queue.clear());
 	}
+
 
 	/**
 	 * Insert a new element into the queue with the given priority.
@@ -140,7 +145,16 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	public void changePriority(int newpriority, int element) {
-		// TODO: Fill in
+		if (!isPresent(element)) {
+			return;
+		}
+		int index = location.get(element);
+		heap.get(index).priority = newpriority;
+		while (index > 0) {
+			index = percolateUp(index);
+		}
+		pushDown(index);
+
 	}
 
 	/**
@@ -157,8 +171,10 @@ public class PriorityQueue {
 	// Thalia
 
 	public int getPriority(int element) {
-
-		System.out.println(location.get(element));
+		if (!isPresent(element)) {
+			return -1;
+		}
+		//System.out.println(location.get(element));
 		int index = location.get(element);
 		return heap.get(index).priority;
 	}
@@ -183,18 +199,19 @@ public class PriorityQueue {
 	 * 
 	 * @return true if the element exists, false otherwise
 	 */
-	// Jordan
+	// Thalia
 	public boolean isPresent(int element) {
-		// TODO: Fill in
-		return false;
+		return location.containsKey(element);
+
 	}
 
 	/**
 	 * Removes all elements from the priority queue
 	 */
-	// Jordan
+	// Thalia
 	public void clear() {
-		// TODO: Fill in
+		location.clear();
+		heap.clear();
 	}
 
 	/**
@@ -390,7 +407,13 @@ public class PriorityQueue {
 	 * Print the underlying list representation
 	 */
 	private void printHeap() {
-		// TODO: Fill in
+		for(int i = 0; i < heap.size(); i++) {
+			System.out.print(heap.get(i).priority);
+			System.out.print("\t");
+			System.out.println(heap.get(i).element);
+		}
+		//return
+		System.out.println(location.toString());
 	}
 
 	/**
