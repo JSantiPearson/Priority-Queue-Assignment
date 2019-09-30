@@ -29,15 +29,20 @@ public class PriorityQueue {
 	// Jordan
 	public static void main(String[] args) {
 		PriorityQueue queue = new PriorityQueue();
-		queue.push(10, 4);
-		queue.push(0, 3);
-		queue.push(1000, 1);
-		queue.push(47, 2);
-		queue.pop();
-		
-		for (int i = 0; i < queue.size(); i++) {
-			System.out.println("(" + queue.heap.get(i).priority + ", " + queue.heap.get(i).element + ")");
+
+		queue.push(30,-3);
+		queue.push(1,-5);
+		queue.push(4,-7);
+		queue.push(8,-1);
+		queue.push(3,-9);
+		queue.push(40,-2);
+
+		for(int i = 0; i < queue.size(); i++) {
+			System.out.print(queue.heap.get(i).priority);
+			System.out.print("\t");
+			System.out.println(queue.heap.get(i).element);
 		}
+		System.out.println(queue.location.toString());
 
 	}
 
@@ -57,15 +62,21 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	public void push(int priority, int element) {
-		// Pair<Integer, Integer> left = heap.get(left(start_index));
+		//Pair<Integer, Integer> left = heap.get(left(start_index));
+		if (priority < 0) {
+			//throw new exception_class("error message");
+			throw new IllegalArgumentException("Priorities cannot be negative");
+		}
 		Pair<Integer, Integer> new_pair = new Pair<>(priority, element);
 		heap.add(new_pair);
+		location.put(new_pair.element, (heap.size() - 1));
 		int index = heap.size() - 1;
-		while (index >= 0) {
+		while(index >= 0) {
 			index = percolateUp(index);
 		}
 
 	}
+
 
 	/**
 	 * Remove the highest priority element <br>
@@ -76,6 +87,7 @@ public class PriorityQueue {
 	 * </ul>
 	 *
 	 */
+
 	// Jordan
 	public void pop() {
 		int tailIndex = heap.size() - 1;
@@ -244,10 +256,15 @@ public class PriorityQueue {
 		if (start_index == 0) {
 			return -1;
 		}
-		// System.out.println(start_index);
-		int parentIndex = (start_index - 1) / 2;
-		if (heap.get(start_index).priority < heap.get(parentIndex).priority) {
+
+		//put(key, value)
+		// map element: key --> index in heap
+		//System.out.println(start_index);
+		int parentIndex = (start_index - 1)/2;
+		if (heap.get(start_index).priority < heap.get(parentIndex).priority ) {
 			swap(start_index, parentIndex);
+			location.put(heap.get(parentIndex).element, parentIndex);
+			location.put(heap.get(start_index).element, start_index);
 			return parentIndex;
 		}
 		return -1;
@@ -262,11 +279,11 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	private void swap(int i, int j) {
-		// set(int index, E element)
+		//set(int index, E element)
 		Pair temp = heap.get(i);
 		heap.set(i, heap.get(j));
 		heap.set(j, temp);
-		// add(int index, E element)
+				//add(int index, E element)
 	}
 
 	/**
