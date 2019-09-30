@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A priority queue class implemented using a min heap.
- * Priorities cannot be negative.
+ * A priority queue class implemented using a min heap. Priorities cannot be
+ * negative.
  *
  * @author Jordan Pearson and Thalia Barr-Malec
  * @version Date
@@ -15,19 +15,21 @@ public class PriorityQueue {
 
 	protected Map<Integer, Integer> location;
 	protected List<Pair<Integer, Integer>> heap;
-	
+
 	private static final int ROOT_INDEX = 0;
 
 	/**
-	 *  Constructs an empty priority queue
+	 * Constructs an empty priority queue
 	 */
 	public PriorityQueue() {
 		heap = new ArrayList<Pair<Integer, Integer>>();
 		location = new HashMap<Integer, Integer>();
 	}
-	//Jordan
+
+	// Jordan
 	public static void main(String[] args) {
 		PriorityQueue queue = new PriorityQueue();
+
 		queue.push(30,-3);
 		queue.push(1,-5);
 		queue.push(4,-7);
@@ -45,20 +47,20 @@ public class PriorityQueue {
 	}
 
 	/**
-	 *  Insert a new element into the queue with the
-	 *  given priority.
+	 * Insert a new element into the queue with the given priority.
 	 *
-	 *	@param priority priority of element to be inserted
-	 *	@param element element to be inserted
-	 *	<br><br>
-	 *	<b>Preconditions:</b>
-	 *	<ul>
-	 *	<li> The element does not already appear in the priority queue.</li>
-	 *	<li> The priority is non-negative.</li>
-	 *	</ul>
+	 * @param priority priority of element to be inserted
+	 * @param element  element to be inserted <br>
+	 *                 <br>
+	 *                 <b>Preconditions:</b>
+	 *                 <ul>
+	 *                 <li>The element does not already appear in the priority
+	 *                 queue.</li>
+	 *                 <li>The priority is non-negative.</li>
+	 *                 </ul>
 	 *
 	 */
-	//Thalia
+	// Thalia
 	public void push(int priority, int element) {
 		//Pair<Integer, Integer> left = heap.get(left(start_index));
 		if (priority < 0) {
@@ -77,178 +79,184 @@ public class PriorityQueue {
 
 
 	/**
-	 *  Remove the highest priority element
-	 *  <br><br>
-	 *	<b>Preconditions:</b>
-	 *	<ul>
-	 *	<li> The priority queue is non-empty.</li>
-	 *	</ul>
+	 * Remove the highest priority element <br>
+	 * <br>
+	 * <b>Preconditions:</b>
+	 * <ul>
+	 * <li>The priority queue is non-empty.</li>
+	 * </ul>
 	 *
 	 */
-	//Jordan
+
+	// Jordan
 	public void pop() {
-		int tailIndex = heap.size()-1;
+		int tailIndex = heap.size() - 1;
 		swap(ROOT_INDEX, tailIndex);
 		heap.remove(tailIndex);
 		pushDown(ROOT_INDEX);
 	}
 
-
 	/**
-	 *  Returns the highest priority in the queue
-	 *  @return highest priority value
-	 *  <br><br>
-	 *	<b>Preconditions:</b>
-	 *	<ul>
-	 *	<li> The priority queue is non-empty.</li>
-	 *	</ul>
+	 * Returns the highest priority in the queue
+	 * 
+	 * @return highest priority value <br>
+	 *         <br>
+	 *         <b>Preconditions:</b>
+	 *         <ul>
+	 *         <li>The priority queue is non-empty.</li>
+	 *         </ul>
 	 */
-	//Jordan
+	// Jordan
 	public int topPriority() {
 		// TODO: Fill in
 		return heap.get(ROOT_INDEX).priority;
 	}
 
-
 	/**
-	 *  Returns the element with the highest priority
-	 *  @return element with highest priority
-	 *  <br><br>
-	 *	<b>Preconditions:</b>
-	 *	<ul>
-	 *	<li> The priority queue is non-empty.</li>
-	 *	</ul>
+	 * Returns the element with the highest priority
+	 * 
+	 * @return element with highest priority <br>
+	 *         <br>
+	 *         <b>Preconditions:</b>
+	 *         <ul>
+	 *         <li>The priority queue is non-empty.</li>
+	 *         </ul>
 	 */
-	//Jordan
+	// Jordan
 	public int topElement() {
 		return heap.get(ROOT_INDEX).element;
 	}
 
-
 	/**
-	 *  Change the priority of an element already in the
-	 *  priority queue.
+	 * Change the priority of an element already in the priority queue.
 	 *
-	 *  @param newpriority the new priority
-	 *  @param element element whose priority is to be changed
-	 *  <br><br>
-	 *	<b>Preconditions:</b>
-	 *	<ul>
-	 *	<li> The element exists in the priority queue</li>
-	 *	<li> The new priority is non-negative </li>
-	 *	</ul>
+	 * @param newpriority the new priority
+	 * @param element     element whose priority is to be changed <br>
+	 *                    <br>
+	 *                    <b>Preconditions:</b>
+	 *                    <ul>
+	 *                    <li>The element exists in the priority queue</li>
+	 *                    <li>The new priority is non-negative</li>
+	 *                    </ul>
 	 */
-	//Thalia
+	// Thalia
 	public void changePriority(int newpriority, int element) {
 		// TODO: Fill in
 	}
 
-
 	/**
-	 *  Gets the priority of the element
+	 * Gets the priority of the element
 	 *
-	 *  @param element the element whose priority is returned
-	 *  @return the priority value
-	 *  <br><br>
-	 *	<b>Preconditions:</b>
-	 *	<ul>
-	 *	<li> The element exists in the priority queue</li>
-	 *	</ul>
+	 * @param element the element whose priority is returned
+	 * @return the priority value <br>
+	 *         <br>
+	 *         <b>Preconditions:</b>
+	 *         <ul>
+	 *         <li>The element exists in the priority queue</li>
+	 *         </ul>
 	 */
-	//Thalia
+	// Thalia
 	public int getPriority(int element) {
 		// TODO: Fill in
 		return 0;
 	}
 
 	/**
-	 *  Returns true if the priority queue contains no elements
-	 *  @return true if the queue contains no elements, false otherwise
+	 * Returns true if the priority queue contains no elements
+	 * 
+	 * @return true if the queue contains no elements, false otherwise
 	 */
-	//Jordan
+	// Jordan
 	public boolean isEmpty() {
 		if (heap.size() == 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
 
 	/**
-	 *  Returns true if the element exists in the priority queue.
-	 *  @return true if the element exists, false otherwise
+	 * Returns true if the element exists in the priority queue.
+	 * 
+	 * @return true if the element exists, false otherwise
 	 */
-	//Jordan
+	// Jordan
 	public boolean isPresent(int element) {
 		// TODO: Fill in
 		return false;
 	}
 
 	/**
-	 *  Removes all elements from the priority queue
+	 * Removes all elements from the priority queue
 	 */
-	//Jordan
+	// Jordan
 	public void clear() {
 		// TODO: Fill in
 	}
 
 	/**
-	 *  Returns the number of elements in the priority queue
-	 *  @return number of elements in the priority queue
+	 * Returns the number of elements in the priority queue
+	 * 
+	 * @return number of elements in the priority queue
 	 */
-	//Jordan
+	// Jordan
 	public int size() {
 		return heap.size();
 	}
 
-
-
 	/*********************************************************
-	 * 				Private helper methods
+	 * Private helper methods
 	 *********************************************************/
-
 
 	/**
 	 * Push down the element at the given position in the heap
+	 * 
 	 * @param start_index the index of the element to be pushed down
 	 * @return the index in the list where the element is finally stored
 	 */
-	//Jordan
+	// Jordan
 	private int pushDown(int start_index) {
 		int startPriority = heap.get(start_index).priority;
-		Pair<Integer, Integer> left = heap.get(left(start_index));
-		Pair<Integer, Integer> right = heap.get(right(start_index));
-		Pair<Integer, Integer> child;
-		int childIndex;
-		if (left.priority >= right.priority) {
-			child = left;
-			childIndex = left(start_index);
-		}
-		else {
-			child = right;
-			childIndex = right(start_index);
-		}
-		if (startPriority >= child.priority) {
+		int left = left(start_index);
+		int right = right(start_index);
+		int child;
+
+		if (left == -1 && right ==-1) {
 			return start_index;
 		}
+		else if (left == -1) {
+			child = right;
+		}
+		else if (right ==-1) {
+			child = left;
+		}
+		else if (heap.get(left).priority >= heap.get(right).priority) {
+			child = right;
+		} 
 		else {
-			swap(start_index, childIndex);
-			pushDown(childIndex);
+			child = left;
+		}
+		if (startPriority > heap.get(child).priority) {
+			swap(start_index, child);
+			pushDown(child);
+		} else {
+			return start_index;
 		}
 		return 0;
 	}
 
 	/**
 	 * Percolate up the element at the given position in the heap
+	 * 
 	 * @param start_index the index of the element to be percolated up
 	 * @return the index in the list where the element is finally stored
 	 */
-	//Thalia
+	// Thalia
 	private int percolateUp(int start_index) {
 		if (start_index == 0) {
 			return -1;
 		}
+
 		//put(key, value)
 		// map element: key --> index in heap
 		//System.out.println(start_index);
@@ -262,14 +270,14 @@ public class PriorityQueue {
 		return -1;
 	}
 
-
 	/**
-	 * Swaps two elements in the priority queue by updating BOTH
-	 * the list representing the heap AND the map
+	 * Swaps two elements in the priority queue by updating BOTH the list
+	 * representing the heap AND the map
+	 * 
 	 * @param i The index of the element to be swapped
 	 * @param j The index of the element to be swapped
 	 */
-	//Thalia
+	// Thalia
 	private void swap(int i, int j) {
 		//set(int index, E element)
 		Pair temp = heap.get(i);
@@ -280,60 +288,61 @@ public class PriorityQueue {
 
 	/**
 	 * Computes the index of the element's left child
+	 * 
 	 * @param parent index of element in list
 	 * @return index of element's left child in list
 	 */
-	//Jodan
+	// Jordan
 	private int left(int parent) {
-		int leftChildIndex = 2*parent+1;
-		if (heap.get(leftChildIndex) != null) {
+		int leftChildIndex = 2 * parent + 1;
+		try {
+			heap.get(leftChildIndex);
 			return leftChildIndex;
-		}
-		else {
-			throw new AssertionError("This Pair does not have a left child!");
+		} catch (IndexOutOfBoundsException e) {
+			return -1;
 		}
 	}
 
 	/**
 	 * Computes the index of the element's right child
+	 * 
 	 * @param parent index of element in list
 	 * @return index of element's right child in list
 	 */
-	//Jordan
+	// Jordan
 	private int right(int parent) {
-		int rightChildIndex = 2*parent+2;
-		if (heap.get(rightChildIndex) != null) {
+		int rightChildIndex = 2 * parent + 2;
+		try {
+			heap.get(rightChildIndex);
 			return rightChildIndex;
-		}
-		else {
-			throw new AssertionError("This Pair does not have a right child!");
+		} catch (IndexOutOfBoundsException e) {
+			return -1;
 		}
 	}
 
 	/**
 	 * Computes the index of the element's parent
+	 * 
 	 * @param child index of element in list
 	 * @return index of element's parent in list
 	 */
-	//Jordan
+	// Jordan
 	private int parent(int child) {
-		int parentIndex = (int) Math.floor((child-1)/2);
-		if (heap.get(parentIndex) != null) {
+		int parentIndex = (int) Math.floor((child - 1) / 2);
+		try {
 			return parentIndex;
-		}
-		else {
+		} catch (AssertionError e) {
 			throw new AssertionError("This Pair does not have a parent!");
 		}
 	}
 
-
 	/*********************************************************
-	 * 	These are optional private methods that may be useful
+	 * These are optional private methods that may be useful
 	 *********************************************************/
-
 
 	/**
 	 * Push down the root element
+	 * 
 	 * @return the index in the list where the element is finally stored
 	 */
 	private int pushDownRoot() {
@@ -342,28 +351,30 @@ public class PriorityQueue {
 	}
 
 	/**
-	 * Percolate up the last leaf in the heap, i.e. the most recently
-	 * added element which is stored in the last slot in the list
+	 * Percolate up the last leaf in the heap, i.e. the most recently added element
+	 * which is stored in the last slot in the list
 	 *
 	 * @return the index in the list where the element is finally stored
 	 */
-	private int percolateUpLeaf(){
+	private int percolateUpLeaf() {
 		// TODO: A one-line function that calls percolateUp()
 		return 0;
 	}
 
 	/**
 	 * Returns true if element is a leaf in the heap
+	 * 
 	 * @param i index of element in heap
 	 * @return true if element is a leaf
 	 */
-	private boolean isLeaf(int i){
+	private boolean isLeaf(int i) {
 		// TODO: Fill in
 		return false;
 	}
 
 	/**
 	 * Returns true if element has two children in the heap
+	 * 
 	 * @param i index of element in the heap
 	 * @return true if element in heap has two children
 	 */
@@ -385,6 +396,5 @@ public class PriorityQueue {
 	private void printMap() {
 		// TODO: Fill in
 	}
-
 
 }
