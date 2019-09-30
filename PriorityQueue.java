@@ -39,6 +39,7 @@ public class PriorityQueue {
 		queue.push(40,-2);
 		//queue.pop();
 		queue.changePriority(0, -2);
+
 		for(int i = 0; i < queue.size(); i++) {
 			System.out.print(queue.heap.get(i).priority);
 			System.out.print("\t");
@@ -46,7 +47,9 @@ public class PriorityQueue {
 		}
 		System.out.println(queue.location.toString());
 		System.out.print(queue.getPriority(-3));
+
 		//System.out.print(queue.clear());
+
 	}
 
 
@@ -97,6 +100,7 @@ public class PriorityQueue {
 		int tailIndex = heap.size() - 1;
 		swap(ROOT_INDEX, tailIndex);
 		heap.remove(tailIndex);
+		location.remove(tailIndex);
 		pushDown(ROOT_INDEX);
 	}
 
@@ -171,10 +175,11 @@ public class PriorityQueue {
 	// Thalia
 
 	public int getPriority(int element) {
+
 		if (!isPresent(element)) {
 			return -1;
 		}
-		//System.out.println(location.get(element));
+
 		int index = location.get(element);
 		return heap.get(index).priority;
 	}
@@ -201,7 +206,9 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	public boolean isPresent(int element) {
+
 		return location.containsKey(element);
+
 
 	}
 
@@ -210,8 +217,10 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	public void clear() {
-		location.clear();
+
 		heap.clear();
+		location.clear();
+
 	}
 
 	/**
