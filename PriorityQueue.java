@@ -93,6 +93,7 @@ public class PriorityQueue {
 		int tailIndex = heap.size() - 1;
 		swap(ROOT_INDEX, tailIndex);
 		heap.remove(tailIndex);
+		location.remove(tailIndex);
 		pushDown(ROOT_INDEX);
 	}
 
@@ -182,7 +183,11 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public boolean isPresent(int element) {
-		// TODO: Fill in
+		for (int i = 0; i < location.size()-1; i++) {
+			if (location.get(i) == element) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -191,7 +196,8 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public void clear() {
-		// TODO: Fill in
+		heap.clear();
+		location.clear();
 	}
 
 	/**
