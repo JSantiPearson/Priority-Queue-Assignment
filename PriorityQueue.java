@@ -204,7 +204,7 @@ public class PriorityQueue {
 	public int getPriority(int element) {
 
 		if (!isPresent(element)) { //if element is not in the queue, throw error
-			throw new AssertionError("Error: Element is missing.";
+			throw new AssertionError("Error: Element is missing.");
 		}
 
 		int index = location.get(element);
