@@ -31,6 +31,7 @@ public class PriorityQueue {
 		
 		PriorityQueue queue = new PriorityQueue();
 
+
 		queue.push(30, -3);
 		queue.push(1, -5);
 		queue.push(4, -7);
@@ -77,10 +78,10 @@ public class PriorityQueue {
 			throw new AssertionError("Error: Queue cannot have duplicate elements.");
 		}
 		Pair<Integer, Integer> new_pair = new Pair<>(priority, element);
-		heap.add(new_pair);
-		location.put(new_pair.element, (heap.size() - 1));
+		heap.add(new_pair); // add new pair to the heap
+		location.put(new_pair.element, (heap.size() - 1));  //add new pair to the location map
 		int index = heap.size() - 1;
-		while(index >= 0) { 
+		while(index >= 0) {  //percolate up until done (-1 will be returned)
 			index = percolateUp(index);
 		}
 
@@ -168,22 +169,22 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	public void changePriority(int newpriority, int element) {
-		if (!isPresent(element)) {
 
+		if (!isPresent(element)) { //if the element is not in queue, throw exception
 			throw new AssertionError("Error: Element is missing.");
-
 			}
 
-			if (isEmpty()){
+			if (isEmpty()){ //if queue is empty, throw exception
 				throw new AssertionError("Error: Queue cannot be empty.");
 			}
 
 		int index = location.get(element);
 		heap.get(index).priority = newpriority;
-		while (index > 0) {
+
+		while (index > 0) { //percolate up until finished (-1 returned), if element needs to go down, -1 will return immediately
 			index = percolateUp(index);
 		}
-		pushDown(index);
+		pushDown(index); //push down
 
 	}
 
@@ -202,7 +203,7 @@ public class PriorityQueue {
 
 	public int getPriority(int element) {
 
-		if (!isPresent(element)) {
+		if (!isPresent(element)) { //if element is not in the queue, throw error
 			throw new AssertionError("Error: Element is missing.");
 		}
 
@@ -317,15 +318,12 @@ public class PriorityQueue {
 			return -1;
 		}
 
-		// put(key, value)
-		// map element: key --> index in heap
-		// System.out.println(start_index);
-		int parentIndex = parent(start_index);
-		if (heap.get(start_index).priority < heap.get(parentIndex).priority) {
+		int parentIndex = parent(start_index); //get parent index
+		if (heap.get(start_index).priority < heap.get(parentIndex).priority) { //if the element is less than its parent, swap
 			swap(start_index, parentIndex);
-			return parentIndex;
+			return parentIndex; //return parent index
 		}
-		return -1;
+		return -1; // if not then element does not need to go up, return -1 to indicate finished
 	}
 
 	/**
@@ -337,13 +335,13 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	private void swap(int i, int j) {
-		// set(int index, E element)
+		//swap elements
 		Pair temp = heap.get(i);
 		heap.set(i, heap.get(j));
 		heap.set(j, temp);
+		//update location
 		location.put(heap.get(i).element, i);
 		location.put(heap.get(j).element, j);
-		// add(int index, E element)
 	}
 
 	/**
