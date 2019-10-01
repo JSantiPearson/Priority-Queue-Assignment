@@ -28,9 +28,8 @@ public class PriorityQueue {
 
 	// Jordan
 	public static void main(String[] args) {
-		//System.out.print("hello world");
+		
 		PriorityQueue queue = new PriorityQueue();
-
 
 		queue.push(30, -3);
 		queue.push(1, -5);
@@ -72,10 +71,10 @@ public class PriorityQueue {
 	// Thalia
 	public void push(int priority, int element) {
 		if (priority < 0) { //throw error if negative input
-			throw new AssertionError("Priorities cannot be negative");
+			throw new AssertionError("Error: Priorities cannot be negative.");
 		}
-		if (isPresent(element)) { //throw error if the element does not exist
-			throw new AssertionError("Cannot have duplicate elements");
+		if (isPresent(element)) { //throw error if the element is a duplicate
+			throw new AssertionError("Error: Queue cannot have duplicate elements.");
 		}
 		Pair<Integer, Integer> new_pair = new Pair<>(priority, element);
 		heap.add(new_pair);
@@ -99,8 +98,9 @@ public class PriorityQueue {
 
 	// Jordan
 	public void pop() {
+		//throw error if queue is empty
 		if (isEmpty()){
-			throw new AssertionError("Empty queue. Cannot pop");
+			throw new AssertionError("Error: The queue cannot be empty.");
 		}
 		// swap the root pair and tail pair
     
@@ -128,7 +128,7 @@ public class PriorityQueue {
 	// Jordan
 	public int topPriority() {
 		if (isEmpty()){
-			throw new AssertionError("Empty queue. No topPriority");
+			throw new AssertionError("Error: Queue cannot be empty.");
 		}
 		// return the root pair's priority
 		return heap.get(ROOT_INDEX).priority;
@@ -147,7 +147,7 @@ public class PriorityQueue {
 	// Jordan
 	public int topElement() {
 		if (isEmpty()){
-			throw new AssertionError("Empty queue. No topElement");
+			throw new AssertionError("Error: Queue cannot be empty.");
 		}
 
 		// return the root pair's element
@@ -170,12 +170,12 @@ public class PriorityQueue {
 	public void changePriority(int newpriority, int element) {
 		if (!isPresent(element)) {
 
-			throw new AssertionError("Error: element missing");
+			throw new AssertionError("Error: Element is missing.");
 
 			}
 
 			if (isEmpty()){
-				throw new AssertionError("Error: Empty queue.");
+				throw new AssertionError("Error: Queue cannot be empty.");
 			}
 
 		int index = location.get(element);
@@ -203,7 +203,7 @@ public class PriorityQueue {
 	public int getPriority(int element) {
 
 		if (!isPresent(element)) {
-			throw new AssertionError("Error: element missing");
+			throw new AssertionError("Error: Element is missing.");
 		}
 
 		int index = location.get(element);
