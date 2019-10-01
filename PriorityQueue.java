@@ -28,7 +28,9 @@ public class PriorityQueue {
 
 	// Jordan
 	public static void main(String[] args) {
+		//System.out.print("hello world");
 		PriorityQueue queue = new PriorityQueue();
+
 
 		queue.push(30, -3);
 		queue.push(1, -5);
@@ -49,9 +51,9 @@ public class PriorityQueue {
 		System.out.println(queue.location.toString());
 		System.out.print(queue.getPriority(-7));
 
-		// System.out.print(queue.clear());
 
 	}
+
 
 	/**
 	 * Insert a new element into the queue with the given priority.
@@ -69,16 +71,17 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	public void push(int priority, int element) {
-		// Pair<Integer, Integer> left = heap.get(left(start_index));
-		if (priority < 0) {
-			// throw new exception_class("error message");
-			throw new IllegalArgumentException("Priorities cannot be negative");
+		if (priority < 0) { //throw error if negative input
+			throw new AssertionError("Priorities cannot be negative");
+		}
+		if (isPresent(element)) { //throw error if the element does not exist
+			throw new AssertionError("Cannot have duplicate elements");
 		}
 		Pair<Integer, Integer> new_pair = new Pair<>(priority, element);
 		heap.add(new_pair);
 		location.put(new_pair.element, (heap.size() - 1));
 		int index = heap.size() - 1;
-		while (index >= 0) {
+		while(index >= 0) { 
 			index = percolateUp(index);
 		}
 
@@ -96,7 +99,11 @@ public class PriorityQueue {
 
 	// Jordan
 	public void pop() {
+		if (isEmpty()){
+			throw new AssertionError("Empty queue. Cannot pop");
+		}
 		// swap the root pair and tail pair
+    
 		int tailIndex = heap.size() - 1;
 		swap(ROOT_INDEX, tailIndex);
 
@@ -120,6 +127,9 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public int topPriority() {
+		if (isEmpty()){
+			throw new AssertionError("Empty queue. No topPriority");
+		}
 		// return the root pair's priority
 		return heap.get(ROOT_INDEX).priority;
 	}
@@ -136,6 +146,10 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public int topElement() {
+		if (isEmpty()){
+			throw new AssertionError("Empty queue. No topElement");
+		}
+
 		// return the root pair's element
 		return heap.get(ROOT_INDEX).element;
 	}
@@ -155,8 +169,15 @@ public class PriorityQueue {
 	// Thalia
 	public void changePriority(int newpriority, int element) {
 		if (!isPresent(element)) {
-			return;
-		}
+
+			throw new AssertionError("Error: element missing");
+
+			}
+
+			if (isEmpty()){
+				throw new AssertionError("Error: Empty queue.");
+			}
+
 		int index = location.get(element);
 		heap.get(index).priority = newpriority;
 		while (index > 0) {
@@ -182,7 +203,7 @@ public class PriorityQueue {
 	public int getPriority(int element) {
 
 		if (!isPresent(element)) {
-			return -1;
+			throw new AssertionError("Error: element missing");
 		}
 
 		int index = location.get(element);
@@ -438,7 +459,6 @@ public class PriorityQueue {
 			System.out.print("\t");
 			System.out.println(heap.get(i).element);
 		}
-		// return
 		System.out.println(location.toString());
 	}
 
