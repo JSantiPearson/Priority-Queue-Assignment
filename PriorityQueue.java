@@ -31,24 +31,26 @@ public class PriorityQueue {
 		//System.out.print("hello world");
 		PriorityQueue queue = new PriorityQueue();
 
-		queue.push(30,-3);
-		queue.push(1,-5);
-		queue.push(4,-7);
-		queue.push(8,-1);
-		queue.push(3,-9);
-		queue.push(40,-2);
-		//queue.pop();
-		queue.changePriority(0, -2);
 
-		for(int i = 0; i < queue.size(); i++) {
+		queue.push(30, -3);
+		queue.push(1, -5);
+		queue.push(4, -7);
+		queue.push(8, -1);
+		queue.push(3, -9);
+		queue.push(40, -2);
+		queue.pop();
+		queue.pop();
+		queue.changePriority(0, -2);
+		queue.pop();
+
+		for (int i = 0; i < queue.size(); i++) {
 			System.out.print(queue.heap.get(i).priority);
 			System.out.print("\t");
 			System.out.println(queue.heap.get(i).element);
 		}
 		System.out.println(queue.location.toString());
-		System.out.print(queue.getPriority(-3));
-		queue.clear();
-		queue.changePriority(9,8);
+		System.out.print(queue.getPriority(-7));
+
 
 	}
 
@@ -79,12 +81,11 @@ public class PriorityQueue {
 		heap.add(new_pair);
 		location.put(new_pair.element, (heap.size() - 1));
 		int index = heap.size() - 1;
-		while(index >= 0) { //percolateUp until
+		while(index >= 0) { 
 			index = percolateUp(index);
 		}
 
 	}
-
 
 	/**
 	 * Remove the highest priority element <br>
@@ -101,10 +102,16 @@ public class PriorityQueue {
 		if (isEmpty()){
 			throw new AssertionError("Empty queue. Cannot pop");
 		}
+		// swap the root pair and tail pair
+    
 		int tailIndex = heap.size() - 1;
 		swap(ROOT_INDEX, tailIndex);
+
+		// remove the tail pair (the old root)
+		location.remove(heap.get(tailIndex).element);
 		heap.remove(tailIndex);
-		location.remove(tailIndex);
+
+		// call pushDown to put the new root in the correct position
 		pushDown(ROOT_INDEX);
 	}
 
@@ -120,10 +127,10 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public int topPriority() {
-		// TODO: Fill in
 		if (isEmpty()){
 			throw new AssertionError("Empty queue. No topPriority");
 		}
+		// return the root pair's priority
 		return heap.get(ROOT_INDEX).priority;
 	}
 
@@ -142,6 +149,8 @@ public class PriorityQueue {
 		if (isEmpty()){
 			throw new AssertionError("Empty queue. No topElement");
 		}
+
+		// return the root pair's element
 		return heap.get(ROOT_INDEX).element;
 	}
 
@@ -201,7 +210,6 @@ public class PriorityQueue {
 		return heap.get(index).priority;
 	}
 
-
 	/**
 	 * Returns true if the priority queue contains no elements
 	 * 
@@ -209,6 +217,7 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public boolean isEmpty() {
+		// If the heap size is 0, it has no elements. Return true.
 		if (heap.size() == 0) {
 			return true;
 		} else {
@@ -225,7 +234,6 @@ public class PriorityQueue {
 	public boolean isPresent(int element) {
 
 		return location.containsKey(element);
-
 
 	}
 
@@ -247,6 +255,7 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	public int size() {
+		// returns the heap size, which is the number of elements in the queue
 		return heap.size();
 	}
 
@@ -262,33 +271,38 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	private int pushDown(int start_index) {
+		//calculate start index priority, left child index, right child index.
 		int startPriority = heap.get(start_index).priority;
 		int left = left(start_index);
 		int right = right(start_index);
 		int child;
 
-		if (left == -1 && right ==-1) {
+		//-1 is returned by left() and right() if the index does not exist.
+		//If neither child exists, the start_index is in the correct location within the heap.
+		if (left == -1 && right == -1) {
 			return start_index;
-		}
-		else if (left == -1) {
+		//if the left child does not exist, then the right child is highest priority.
+		} else if (left == -1) {
 			child = right;
-		}
-		else if (right ==-1) {
+		//if the right child does not exist, then the left child is highest priority.
+		} else if (right == -1) {
+			child = left;
+		//if the right child is higher priority than left, assign right as child.
+		} else if (heap.get(left).priority >= heap.get(right).priority) {
+			child = right;
+		//if all of the above is untrue, then the left child is highest priority.
+		} else {
 			child = left;
 		}
-		else if (heap.get(left).priority >= heap.get(right).priority) {
-			child = right;
-		} 
-		else {
-			child = left;
-		}
+		//If the highest priority child is higher priority than the start_index, swap them.
 		if (startPriority > heap.get(child).priority) {
 			swap(start_index, child);
 			pushDown(child);
+		//If not, it is in the correct spot and the start_index is returned.
 		} else {
 			return start_index;
 		}
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -303,11 +317,11 @@ public class PriorityQueue {
 			return -1;
 		}
 
-		//put(key, value)
+		// put(key, value)
 		// map element: key --> index in heap
-		//System.out.println(start_index);
-		int parentIndex = (start_index - 1)/2;
-		if (heap.get(start_index).priority < heap.get(parentIndex).priority ) {
+		// System.out.println(start_index);
+		int parentIndex = parent(start_index);
+		if (heap.get(start_index).priority < heap.get(parentIndex).priority) {
 			swap(start_index, parentIndex);
 			return parentIndex;
 		}
@@ -323,13 +337,13 @@ public class PriorityQueue {
 	 */
 	// Thalia
 	private void swap(int i, int j) {
-		//set(int index, E element)
+		// set(int index, E element)
 		Pair temp = heap.get(i);
 		heap.set(i, heap.get(j));
 		heap.set(j, temp);
 		location.put(heap.get(i).element, i);
 		location.put(heap.get(j).element, j);
-				//add(int index, E element)
+		// add(int index, E element)
 	}
 
 	/**
@@ -340,10 +354,13 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	private int left(int parent) {
+		// Calculate the index of the left child with the following formula
 		int leftChildIndex = 2 * parent + 1;
 		try {
 			heap.get(leftChildIndex);
 			return leftChildIndex;
+		// If the index is out of bounds, then that means the (would be) index of the
+		// left child does not exist. Return -1 for the pushDown method.
 		} catch (IndexOutOfBoundsException e) {
 			return -1;
 		}
@@ -357,10 +374,13 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	private int right(int parent) {
+		// Calculate the index of the right child with the following formula
 		int rightChildIndex = 2 * parent + 2;
 		try {
 			heap.get(rightChildIndex);
 			return rightChildIndex;
+		// If the index is out of bounds, then that means the (would be) index of the
+		// left child does not exist. Return -1 for the pushDown method.
 		} catch (IndexOutOfBoundsException e) {
 			return -1;
 		}
@@ -374,6 +394,7 @@ public class PriorityQueue {
 	 */
 	// Jordan
 	private int parent(int child) {
+		// Calculate the index of the parent with the following formula
 		int parentIndex = (int) Math.floor((child - 1) / 2);
 		try {
 			return parentIndex;
@@ -433,12 +454,11 @@ public class PriorityQueue {
 	 * Print the underlying list representation
 	 */
 	private void printHeap() {
-		for(int i = 0; i < heap.size(); i++) {
+		for (int i = 0; i < heap.size(); i++) {
 			System.out.print(heap.get(i).priority);
 			System.out.print("\t");
 			System.out.println(heap.get(i).element);
 		}
-		//return
 		System.out.println(location.toString());
 	}
 
